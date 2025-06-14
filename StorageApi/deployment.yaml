@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: storage-api
+  template:
+    metadata:
+      labels:
+        app: storage-api
+    spec:
+      containers:
+      - name: storage-api
+        image: storage-api:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-api-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: storage-api
