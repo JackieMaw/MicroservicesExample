@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient<WeatherSummaryHttpClient>();
+builder.Services.AddHttpClient<WeatherDescriptionHttpClient>();
 builder.Services.AddHttpClient<DateServiceHttpClient>();
 
 var app = builder.Build();

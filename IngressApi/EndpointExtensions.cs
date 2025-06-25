@@ -6,7 +6,7 @@ public static class EndpointExtensions
     {
         RouteGroupBuilder group = app.MapGroup("/weatherforecast");
 
-        group.MapGet("/", (IWeatherForecaster weatherForecaster) => weatherForecaster.GetForecastAsync)
+        group.MapGet("/", (IWeatherForecastService weatherForecaster) => weatherForecaster.GetForecastAsync)
             .WithName("GetWeatherForecast")
             .WithOpenApi();
     }

@@ -5,16 +5,16 @@ public record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
 
-public interface IWeatherForecaster
+public interface IWeatherForecastService
 {
-    Task<WeatherForecast[]> GetForecastAsync(IWeatherSummaryService weatherSummaryService, IDateService dateService);
+    Task<WeatherForecast[]> GetForecastAsync(IWeatherDescriptionService weatherSummaryService, IDateService dateService);
 }
 
-public class WeatherForecaster : IWeatherForecaster
+public class WeatherForecastService : IWeatherForecastService
 {
-    public async Task<WeatherForecast[]> GetForecastAsync(IWeatherSummaryService weatherSummaryService, IDateService dateService)
+    public async Task<WeatherForecast[]> GetForecastAsync(IWeatherDescriptionService weatherDescriptionService, IDateService dateService)
     {
-        string[] summaries = await weatherSummaryService.GetWeatherSummariesAsync();
+        string[] summaries = await weatherDescriptionService.GetWeatherDescriptionsAsync();
         DateOnly[] dates = await dateService.GetDatesAsync();
         return dates.Select(date =>
             new WeatherForecast
